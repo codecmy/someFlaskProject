@@ -53,8 +53,76 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+
+    .job-listing {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .job-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .job-location,
+    .job-salary {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .contact-btn {
+      margin-top: 30px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-btn:hover {
       background-color: #1b4f72;
+    }
+    .apply-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .apply-btn:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+    .job-salary-apply {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -69,12 +137,19 @@
       and AI-based matching to improve the hiring process. Overall, job posting sites streamline recruitment and provide valuable
       exposure for employers and opportunities for job seekers.
     </p>
-    <h2>Open Positions</h2>
-    <p>{% for jobs in JOBS %}
-      <div>{{jobs['title']}}<br></div>
-       {% endfor %}
-    </p>
-    <button>Contact Us</button>
+    <div class="container">
+      <div class="job-listing">
+        {% for job in jobs %}
+          <div class="job-card">
+            <div class="job-title">{{ job['title'] }}</div>
+            <div class="job-location">📍 {{ job['location'] }}</div>
+            <div class="job-salary">💰 {{ job['salary'] }}</div>
+            <button class="apply-btn">Apply</button>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="contact-btn">Contact Us</button>
+    </div>
   </div>
 </body>
 </html>
