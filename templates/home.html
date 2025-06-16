@@ -6,6 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get A Job</title>
   <style>
+    a{
+      text-decoration: none;
+      color: white;
+    }
+    .career-section {
+      padding: 40px 20px;
+      background-color: var(--bg-color);
+    }
+
+    .career-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .career-text {
+      flex: 1 1 400px;
+    }
+
+    .career-text h2 {
+      font-size: 1.8rem;
+      color: var(--link-color);
+      margin-bottom: 12px;
+    }
+
+    .career-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+
+    .career-image {
+      flex: 1 1 400px;
+      text-align: center;
+    }
+
+    .career-image img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      height: auto;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -124,19 +171,49 @@
       align-items: center;
       margin-top: 10px;
     }
+    a.button-link {
+      display: inline-block;
+      background-color: #2e86de; /* Matches the theme */
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    a.button-link:hover {
+      background-color: #1c6ed2;
+      transform: translateY(-2px);
+    }
+
+    a.button-link:active {
+      background-color: #195fc1;
+      transform: translateY(0);
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
+    {% include 'nav.html' %}
     <img src="static/photo1.jpg" alt="Job banner">
-    <p>
-      A job posting site is an online platform where employers can advertise job openings and connect with potential candidates.
-      These sites allow businesses to reach a wide audience by listing job details such as roles, responsibilities, qualifications,
-      salary, and application deadlines. Job seekers can browse listings based on filters like location, industry, or experience
-      level, and apply directly through the site. Many platforms also offer features like resume uploads, automated job alerts,
-      and AI-based matching to improve the hiring process. Overall, job posting sites streamline recruitment and provide valuable
-      exposure for employers and opportunities for job seekers.
-    </p>
+    <section class="career-section">
+      <div class="career-content">
+        <div class="career-text">
+          <h2>Start Your Career Today</h2>
+          <p>
+            A job posting site is an online platform where employers can advertise job openings and connect with potential candidates.
+            These sites allow businesses to reach a wide audience by listing job details such as roles, responsibilities, qualifications, salary, and application deadlines.
+            Job seekers can browse listings based on filters like location, industry, or experience level, and apply directly through the site.
+          </p>
+        </div>
+        <div class="career-image">
+          <img src="static/photo2.jpg" alt="Career Image">
+        </div>
+      </div>
+    </section>
     <div class="container">
       <div class="job-listing">
         {% for job in jobs %}
@@ -144,7 +221,7 @@
             <div class="job-title">{{ job['title'] }}</div>
             <div class="job-location">📍 {{ job['location'] }}</div>
             <div class="job-salary">💰 {{ job['salary'] }}</div>
-            <button class="apply-btn">Apply</button>
+            <button class="apply-btn"><a href="mailto:textexample@gmail.com?subject=Application for {{ job['title'] }}">Apply</a></button>
           </div>
         {% endfor %}
       </div>
