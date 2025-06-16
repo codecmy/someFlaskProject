@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get A Job</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1b4f72;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="static/photo1.jpg" alt="Job banner">
+    <p>
+      A job posting site is an online platform where employers can advertise job openings and connect with potential candidates.
+      These sites allow businesses to reach a wide audience by listing job details such as roles, responsibilities, qualifications,
+      salary, and application deadlines. Job seekers can browse listings based on filters like location, industry, or experience
+      level, and apply directly through the site. Many platforms also offer features like resume uploads, automated job alerts,
+      and AI-based matching to improve the hiring process. Overall, job posting sites streamline recruitment and provide valuable
+      exposure for employers and opportunities for job seekers.
+    </p>
+    <h2>Open Positions</h2>
+    <p>{% for jobs in JOBS %}
+      <div>{{jobs['title']}}<br></div>
+       {% endfor %}
+    </p>
+    <button>Contact Us</button>
+  </div>
+</body>
+</html>
