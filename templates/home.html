@@ -150,12 +150,13 @@
       background-color: #1b4f72;
     }
     .apply-btn {
+      display: inline-block;
       margin-top: 10px;
       padding: 10px 20px;
       background-color: #28a745;
       color: white;
       font-size: 0.95rem;
-      border: none;
+      text-decoration: none;
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
@@ -164,6 +165,7 @@
     .apply-btn:hover {
       background-color: #218838;
       transform: scale(1.05);
+      color: white;
     }
     .job-salary-apply {
       display: flex;
@@ -221,7 +223,7 @@
             <div class="job-title">{{ job['title'] }}</div>
             <div class="job-location">📍 {{ job['location'] }}</div>
             <div class="job-salary">💰 {{ job['salary'] }}</div>
-            <button class="apply-btn"><a href="mailto:textexample@gmail.com?subject=Application for {{ job['title'] }}">Apply</a></button>
+            <a href="mailto:textexample@gmail.com?subject=Application for {{ job['title'] }}" class="apply-btn">Apply</a>
           </div>
         {% endfor %}
       </div>
