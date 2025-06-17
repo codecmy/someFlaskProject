@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ job.title }} - Job Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    /* Dark mode toggle optional */
+    .job-body {
+      background: linear-gradient(to right, #121212, #1f1f1f);
+      color: #f2f2f2;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Card layout */
+    .job-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .job-card {
+      background-color: #2a2a2a;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .job-card h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #e3e3e3;
+    }
+
+    .job-card p {
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .apply-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #00b894;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .apply-btn:hover {
+      background-color: #019875;
+    }
+
+  </style>
+</head>
+<body class="job-body">
+
+  <div class="job-container">
+    <div class="job-card">
+      <h1>{{ job.title }}</h1>
+      <p class="location"><strong>Location:</strong> {{ job.location }}</p>
+      <p class="salary"><strong>Salary:</strong> {{ job.salary }}</p>
+      <p class="qualification"><strong>Qualification:</strong> {{ job.qualifications or 'Relevant Experience' }}</p>
+      <p class="description"><strong>Job Role:</strong><br>{{ job.description or 'Details to be discussed during the interview.' }}</p>
+
+      <a href="{{ job.google_form or '#' }}" class="apply-btn" target="_blank">Apply Now</a>
+    </div>
+  </div>
+
+</body>
+</html>

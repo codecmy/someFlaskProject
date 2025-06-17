@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post a Job</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="post-job-body">
+
+  <div class="post-job-container">
+    <h1>Post a Job</h1>
+    <p>Fill in the details below to publish a job listing on our platform.</p>
+
+    <form method="POST" action="{{ url_for('submit_job') }}" class="post-job-form">
+      <div class="form-group">
+        <label for="title">Job Title</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required>
+      </div>
+
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <input type="text" id="qualification" name="qualification" required>
+      </div>
+
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="text" id="salary" name="salary">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Job Description</label>
+        <textarea id="description" name="description" rows="5" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="form_link">Google Form (for applications)</label>
+        <input type="url" id="form_link" name="form_link" placeholder="https://forms.gle/..." required>
+      </div>
+
+      <button type="submit" class="submit-job-button">Post Job</button>
+    </form>
+  </div>
+
+</body>
+</html>
