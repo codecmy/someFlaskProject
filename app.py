@@ -73,3 +73,6 @@ def show_application_form():
         return render_template("apply_form.html", job=job)
     else:
         return "Invalid Job ID", 404
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
