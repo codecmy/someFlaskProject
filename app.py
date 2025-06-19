@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify,request
 
 JOBS=[
     {
@@ -64,5 +64,12 @@ def job_details(job_id):
 def postajob():
     return render_template('postajob.html')
 
-if __name__ == "__main__":
-  app.run(host='0.0.0.0',port=5000,debug=True)
+@app.route("/apply")
+def show_application_form():
+    job_id = request.args.get("job_id", type=int)
+    job = next((job for job in JOBS if job["id"] == job_id), None)
+
+    if job:
+        return render_template("apply_form.html", job=job)
+    else:
+        return "Invalid Job ID", 404

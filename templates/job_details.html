@@ -79,7 +79,7 @@
       <p class="qualification"><strong>Qualification:</strong> {{ job.qualifications or 'Relevant Experience' }}</p>
       <p class="description"><strong>Job Role:</strong><br>{{ job.description or 'Details to be discussed during the interview.' }}</p>
 
-      <a href="{{ job.google_form or '#' }}" class="apply-btn" target="_blank">Apply Now</a>
+      <a href="{{ url_for('show_application_form',job_id=job['id']) }}" class="apply-btn" target="_blank">Apply Now</a>
     </div>
   </div>
 
