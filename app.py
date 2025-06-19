@@ -74,5 +74,16 @@ def show_application_form():
     else:
         return "Invalid Job ID", 404
 
+@app.route("/submit_application", methods=["POST"])
+def submit_application():
+    job_id = request.form.get("job_id")
+    position = request.form.get("position") 
+    first_name = request.form.get("first_name") 
+    last_name = request.form.get("last_name")
+    # ...rest of your data
+    print(f"User named:{first_name} {last_name} applied for job ID: {job_id}, Role: {position}")
+    return "Application submitted successfully! Thank you for applying. click the link to go back to the home page <a href='/'>Home</a>"
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
