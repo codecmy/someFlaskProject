@@ -48,16 +48,17 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database1.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
 
-class Job_Applicants(db.Model):
-    slno=db.column(db.Integer,primary_key=True)
-    first_name=db.column(db.String(80),nullable=False)
-    last_name=db.column(db.String(80),nullable=False)
-    email=db.column(db.String(120),nullable=False)
-    phone=db.column(db.String(120),nullable=False)
-    question=db.column(db.String(120),nullable=True)
-    job_id=db.column(db.Integer,nullable=False)
+class database1(db.Model):
+    __tablename__ = 'database1'  # <-- This must match
+    slno=db.Column(db.Integer,primary_key=True)
+    first_name=db.Column(db.String(80),nullable=False)
+    last_name=db.Column(db.String(80),nullable=False)
+    email=db.Column(db.String(120),nullable=False)
+    phone=db.Column(db.String(120),nullable=False)
+    question=db.Column(db.String(120),nullable=True)
+    job_id=db.Column(db.Integer,nullable=False)
     resume_pdf = db.Column(db.LargeBinary, nullable=False)
-    date_created=db.column(db.DateTime,default=datetime.utcnow)
+    date_created=db.Column(db.DateTime,default=datetime.utcnow)
      
     def __repr__(self) -> str:
           return "{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.resume_pdf} - {self.date_created}"
@@ -98,8 +99,17 @@ def submit_application():
     position = request.form.get("position") 
     first_name = request.form.get("first_name") 
     last_name = request.form.get("last_name")
+    email = request.form.get("email")
+    phone = request.form.get("phone")
+    question = request.form.get("cover_letter")
+    resume_pdf = request.files["resume"].read()
     # ...rest of your data
-    print(f"User named:{first_name} {last_name} applied for job ID: {job_id}, Role: {position}")
+    # Save the data to the database
+    new_application = database1(first_name=first_name, last_name=last_name, email=email, phone=phone, question=question, job_id=job_id, resume_pdf=resume_pdf)
+    db.session.add(new_application)
+    db.session.commit()
+    Job_applicants=database1.query.all()
+    print(Job_applicants)
     return "Application submitted successfully! Thank you for applying. click the link to go back to the home page <a href='/'>Home</a>"
 
 
