@@ -48,7 +48,7 @@ app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database1.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
 
-class database1(db.Model):
+class Database1(db.Model):
     __tablename__ = 'database1'  # <-- This must match
     slno=db.Column(db.Integer,primary_key=True)
     first_name=db.Column(db.String(80),nullable=False)
@@ -56,12 +56,21 @@ class database1(db.Model):
     email=db.Column(db.String(120),nullable=False)
     phone=db.Column(db.String(120),nullable=False)
     question=db.Column(db.String(120),nullable=True)
-    job_id=db.Column(db.Integer,nullable=False)
+    job_id=db.Column(db.String(10),nullable=False)
     resume_pdf = db.Column(db.LargeBinary, nullable=False)
     date_created=db.Column(db.DateTime,default=datetime.utcnow)
-     
+
+    def __init__(self, first_name, last_name, email, phone, question, job_id, resume_pdf):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
+        self.question = question
+        self.job_id = job_id
+        self.resume_pdf = resume_pdf
+        self.date_created = datetime.utcnow()
     def __repr__(self) -> str:
-        return f"{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.resume_pdf} - {self.date_created}"
+        return f"{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.date_created}"
 
 # Create tables
 with app.app_context():
@@ -99,8 +108,7 @@ def show_application_form():
 
 @app.route("/submit_application", methods=["POST"])
 def submit_application():
-    job_id = request.form.get("job_id")
-    position = request.form.get("position") 
+    job_id = request.form.get("job_id") 
     first_name = request.form.get("first_name") 
     last_name = request.form.get("last_name")
     email = request.form.get("email")
@@ -109,10 +117,10 @@ def submit_application():
     resume_pdf = request.files["resume"].read()
     # ...rest of your data
     # Save the data to the database
-    new_application = database1(first_name=first_name, last_name=last_name, email=email, phone=phone, question=question, job_id=job_id, resume_pdf=resume_pdf)
+    new_application = Database1(first_name=first_name, last_name=last_name, email=email, phone=phone, question=question, job_id=job_id, resume_pdf=resume_pdf)
     db.session.add(new_application)
     db.session.commit()
-    Job_applicants=database1.query.all()
+    Job_applicants=Database1.query.all()
     print(Job_applicants)
     return "Application submitted successfully! Thank you for applying. click the link to go back to the home page <a href='/'>Home</a>"
 
