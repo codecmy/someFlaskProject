@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify,request
-
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 JOBS=[
     {
         'id':1,
@@ -43,6 +44,23 @@ JOBS=[
 ]
 
 app=Flask(__name__) 
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database1.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+db = SQLAlchemy(app)
+
+class Job_Applicants(db.Model):
+    slno=db.column(db.Integer,primary_key=True)
+    first_name=db.column(db.String(80),nullable=False)
+    last_name=db.column(db.String(80),nullable=False)
+    email=db.column(db.String(120),nullable=False)
+    phone=db.column(db.String(120),nullable=False)
+    question=db.column(db.String(120),nullable=True)
+    job_id=db.column(db.Integer,nullable=False)
+    resume_pdf = db.Column(db.LargeBinary, nullable=False)
+    date_created=db.column(db.DateTime,default=datetime.utcnow)
+     
+    def __repr__(self) -> str:
+          return "{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.resume_pdf} - {self.date_created}"
 
 @app.route("/")
 def hello_world():
