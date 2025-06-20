@@ -61,7 +61,11 @@ class database1(db.Model):
     date_created=db.Column(db.DateTime,default=datetime.utcnow)
      
     def __repr__(self) -> str:
-          return "{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.resume_pdf} - {self.date_created}"
+        return f"{self.slno} - {self.first_name} - {self.last_name} - {self.email} - {self.phone} - {self.question} - {self.job_id} - {self.resume_pdf} - {self.date_created}"
+
+# Create tables
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def hello_world():
